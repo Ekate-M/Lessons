@@ -6,7 +6,7 @@ public class Product {
     private double price;
     private boolean isReserved;
 
-    // Конструктор
+
     public Product(String name, String productionDate, String manufacturer,
                    String countryOfOrigin, double price, boolean isReserved) {
         this.name = name;
@@ -17,7 +17,7 @@ public class Product {
         this.isReserved = isReserved;
     }
 
-    // Метод для вывода информации
+
     public void printInfo() {
         System.out.println("Товар: " + name);
         System.out.println("Дата производства: " + productionDate);

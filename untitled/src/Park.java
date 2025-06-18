@@ -2,7 +2,7 @@ public class Park {
     private String parkName;
     private Attraction[] attractions;
 
-    // Внутренний класс для аттракционов
+
     public class Attraction {
         private String name;
         private String workingHours;
@@ -22,13 +22,13 @@ public class Park {
         }
     }
 
-    // Конструктор парка
+
     public Park(String parkName, Attraction[] attractions) {
         this.parkName = parkName;
         this.attractions = attractions;
     }
 
-    // Метод для вывода информации о парке
+
     public void printParkInfo() {
         System.out.println("Парк: " + parkName);
         System.out.println("Аттракционы:");

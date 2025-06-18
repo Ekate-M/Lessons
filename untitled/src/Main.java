@@ -13,7 +13,7 @@ public class Main {
         productsArray[4] = new Product("Galaxy Z Fold 6", "01.08.2024",
                 "Samsung Corp.", "Korea", 4599, true);
 
-        // Вывод информации о товарах
+
         for (Product product : productsArray) {
             product.printInfo();
         }
