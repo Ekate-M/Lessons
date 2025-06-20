@@ -17,7 +17,7 @@ public class Cyber {
                 {"1", "2", "3", "4"},
                 {"1", "2", "3", "4"},
                 {"1", "2", "3", "4"},
-                {"1", "2", "X", "4"}  // Ошибка в данных
+                {"1", "2", "X", "4"}
         };
 
         try {
@@ -42,13 +42,7 @@ public class Cyber {
         }
     }
 
-    /**
-     * Суммирует элементы массива, преобразуя их в числа.
-     * @param arr Входной массив 4x4
-     * @return Сумма элементов
-     * @throws MyArraySizeException Если массив не 4x4
-     * @throws MyArrayDataException Если элемент не число
-     */
+
     public int sumArray(String[][] arr) throws MyArraySizeException, MyArrayDataException {
         if (arr.length != 4) {
             throw new MyArraySizeException("Ошибка: массив должен быть 4x4 (строк: " + arr.length + ")");
@@ -74,7 +68,7 @@ public class Cyber {
                 }
             }
         }
-        return sum;  // Исправлено: возвращаем sum вместо 0
+        return sum;
     }
 }
 
