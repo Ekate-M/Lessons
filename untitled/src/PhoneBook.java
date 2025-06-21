@@ -43,11 +43,11 @@ public class PhoneBook {
         // Добавляем записи
         book.add("Иванов", "123-456");
         book.add("Петров", "555-123");
-        book.add("Иванов", "789-012");  // У Иванова теперь два номера
+        book.add("Иванов", "789-012");
 
 
         System.out.println("Телефоны Иванова: " + book.get("Иванов"));
-        System.out.println("Телефоны Сидорова: " + book.get("Сидоров"));  // Пустой список
+        System.out.println("Телефоны Сидорова: " + book.get("Сидоров"));
 
         System.out.println("\nПолный справочник:");
         System.out.println(book);
