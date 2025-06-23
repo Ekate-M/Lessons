@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Set<Student> students = new HashSet<>();
 
-        // Добавляем студентов
+
         students.add(new Student("Иван Иванов", "Группа 101", 1,
                 Map.of("Математика", 4, "Физика", 5, "Химия", 3)));
         students.add(new Student("Петр Петров", "Группа 102", 2,
@@ -20,27 +20,26 @@ public class Main {
         System.out.println("Все студенты:");
         students.forEach(System.out::println);
 
-        // Удаляем студентов с средним баллом < 3
+
         removeUnderperformingStudents(students);
         System.out.println("\nСтуденты после отчисления (средний балл >= 3):");
         students.forEach(System.out::println);
 
-        // Переводим студентов на следующий курс (если средний балл >= 3)
         promoteStudents(students);
         System.out.println("\nСтуденты после перевода на следующий курс:");
         students.forEach(System.out::println);
 
-        // Печатаем студентов 2-го курса
+
         System.out.println("\nСтуденты 2-го курса:");
         printStudents(students, 2);
     }
 
-    // Метод для удаления студентов с средним баллом < 3
+
     public static void removeUnderperformingStudents(Set<Student> students) {
         students.removeIf(student -> student.getAverageGrade() < 3);
     }
 
-    // Метод для перевода студентов на следующий курс (если средний балл >= 3)
+
     public static void promoteStudents(Set<Student> students) {
         for (Student student : students) {
             if (student.getAverageGrade() >= 3) {
@@ -49,7 +48,7 @@ public class Main {
         }
     }
 
-    // Метод для печати студентов определенного курса
+
     public static void printStudents(Set<Student> students, int course) {
         students.stream()
                 .filter(student -> student.getCourse() == course)
