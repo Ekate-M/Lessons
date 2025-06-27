@@ -44,7 +44,7 @@ public class Park {
         Park.Attraction[] attractions = new Park.Attraction[3];
         attractions[0] = new Park.Attraction("Американские горки", "10:00-20:00", 450.);
         attractions[1] = new Park.Attraction("Колесо обозрения", "09:00-22:00", 250);
-        attractions[2] = new Park.Attraction("Водные горки", "11:00-19:00", 1000);
+        attractions[2] = new Park.Attraction("Ветерок", "11:00-19:00", 300);
 
         // Создаем парк
         Park myPark = new Park("Развлечений", attractions);
