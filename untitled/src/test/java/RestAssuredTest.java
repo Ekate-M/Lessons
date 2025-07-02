@@ -8,7 +8,7 @@ public class RestAssuredTest {
     @Test
     public void testGetRequestWithFullValidation() {
         given()
-                .baseUri("https://postman-echo.com")  // Базовый URL без эндпоинта
+                .baseUri("https://postman-echo.com/get")  // Базовый URL без эндпоинта
                 .queryParam("test", "example")         // Добавляем тестовый параметр
                 .when()
                 .get("/get")                          // Указываем эндпоинт отдельно
