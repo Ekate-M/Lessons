@@ -18,6 +18,7 @@ public class RestAssuredTest {
                 .then()
                 .statusCode(200)
                 .body("args", equalTo(Collections.emptyMap()))  // Проверяем, что args пуст
+                .body("headers.host", equalTo("postman-echo.com")) // Проверка конкретного заголовка
                 .body("url", equalTo("https://postman-echo.com/get"));  // URL без параметров
     }
 }
