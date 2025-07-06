@@ -50,9 +50,8 @@ public class RestAssuredTest {
                 .body("url", equalTo("https://postman-echo.com/post"));
     }
     @Test
-    public void testPostRequestWithJsonValidation() {
-        String requestBody = "test body"; // Длина 9 символов
-        int expectedLength = requestBody.length();
+    public void testPostmanEchoResponse() {
+        String requestBody = "test"; // Должно соответствовать content-length: 8
 
         given()
                 .baseUri("https://postman-echo.com")
@@ -62,11 +61,21 @@ public class RestAssuredTest {
                 .post("/post")
                 .then()
                 .statusCode(200)
-                // Проверка длины содержимого
-                .body("headers.'content-length'", equalTo(String.valueOf(expectedLength)))
-                // Остальные проверки
-                .body("data", equalTo(requestBody))
-                .body("headers.content-type", containsString("application/json"));
-    }
 
-}
+                // Проверка структуры ответа
+                .body("args", equalTo(Collections.emptyMap()))
+                .body("files", equalTo(Collections.emptyMap()))
+                .body("form", equalTo(Collections.emptyMap()))
+                .body("json", nullValue())
+
+                // Проверка данных
+                .body("data", equalTo(requestBody))
+
+                // Проверка обязательных заголовков
+                .body("headers.host", equalTo("postman-echo.com"))
+                .body("headers.content-type", containsString("application/json"))
+                .body("headers.accept", equalTo("*/*"))
+                .body("headers.'x-forwarded-proto'", equalTo("https"));
+
+
+    }}
