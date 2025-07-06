@@ -49,4 +49,24 @@ public class RestAssuredTest {
                 // Проверка URL
                 .body("url", equalTo("https://postman-echo.com/post"));
     }
+    @Test
+    public void testPostRequestWithJsonValidation() {
+        String requestBody = "test body"; // Длина 9 символов
+        int expectedLength = requestBody.length();
+
+        given()
+                .baseUri("https://postman-echo.com")
+                .contentType("application/json")
+                .body(requestBody)
+                .when()
+                .post("/post")
+                .then()
+                .statusCode(200)
+                // Проверка длины содержимого
+                .body("headers.'content-length'", equalTo(String.valueOf(expectedLength)))
+                // Остальные проверки
+                .body("data", equalTo(requestBody))
+                .body("headers.content-type", containsString("application/json"));
+    }
+
 }
