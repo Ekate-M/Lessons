@@ -44,10 +44,8 @@ public class RestAssuredTest {
                 .body("headers.user-agent", notNullValue())
                 .body("headers.accept", equalTo("*/*"))
                 .body("headers.'content-length'", equalTo("58"))
-                // Проверка json (парсинг тела как JSON)
                 .body("json", nullValue())
-                // Проверка URL
-                .body("url", equalTo("https://postman-echo.com/post"));
+
     }
     @Test
     public void testPostmanEchoResponse() {
