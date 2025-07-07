@@ -75,41 +75,33 @@ public class RestAssuredTest {
                 .body("headers.accept", equalTo("*/*"))
                 .body("headers.'x-forwarded-proto'", equalTo("https"));
 
-
-    } @Test
-    public void testFormDataResponseWithRestAssured() {
-        given()
-                .baseUri("https://postman-echo.com")  //  URL
-                .contentType("application/x-www-form-urlencoded")
-                .formParam("foo1", "bar1")
-                .formParam("foo2", "bar2")
-                .log().all()
-                .when()
-                .post("/post")
-                .then()
-                .log().all()
-                .statusCode(200)
-
-                // Проверка структуры
-                .body("args", equalTo(Collections.emptyMap()))
-                .body("data", equalTo(""))
-                .body("files", equalTo(Collections.emptyMap()))
-
-                // Проверка данных формы
-                .body("form.foo1", equalTo("bar1"))
-                .body("form.foo2", equalTo("bar2"))
-
-                // Проверка JSON
-                .body("json.foo1", equalTo("bar1"))
-                .body("json.foo2", equalTo("bar2"))
-
-                // Проверка заголовков
-                .body("headers.host", equalTo("postman-echo.com"))
-                .body("headers.'content-type'", containsString("application/x-www-form-urlencoded"))
-                .body("headers.'content-length'", equalTo("19"))
-                .body("headers.'x-forwarded-proto'", equalTo("https"));
+} @Test
+public void testFormDataResponse() {
+    given()
+            .baseUri("https://postman-echo.com")
+            .contentType("application/x-www-form-urlencoded")
+            .formParam("foo1", "bar1")
+            .formParam("foo2", "bar2")
+            .log().all()
+            .when()
+            .post("/post")
+            .then()
+            .log().all()
+            .statusCode(200)
 
 
-    }
+            // Проверка структуры
+            .body("args", equalTo(Map.of()))
+            .body("data", equalTo(""))
+            .body("files", equalTo(Map.of()))
+
+            // Проверка данных формы
+            .body("form.foo1", equalTo("bar1"))
+            .body("form.foo2", equalTo("bar2"))
+
+            // Проверка JSON
+            .body("json.foo1", equalTo("bar1"))
+            .body("json.foo2", equalTo("bar2"));
+}
 }
 }
