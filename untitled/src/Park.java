@@ -1,9 +1,7 @@
-
 public class Park {
     private String parkName;
     private Attraction[] attractions;
 
-    // Конструктор парка
     public Park(String name, Attraction[] attractions) {
         this.parkName = name;
         this.attractions = attractions;
@@ -24,12 +22,11 @@ public class Park {
         public void printInfo() {
             System.out.println("Аттракцион: " + attractionName);
             System.out.println("Время работы: " + workingHours);
-            System.out.println("Стоимость: " + price + " ₽ ");
+            System.out.println("Стоимость: " + price + " ₽");
             System.out.println("-----------------------------");
         }
     }
 
-    // Метод для вывода информации о парке и его аттракционах
     public void printParkInfo() {
         System.out.println("Добро пожаловать в парк: " + parkName);
         System.out.println("Наши аттракционы:");
@@ -37,17 +34,4 @@ public class Park {
             attraction.printInfo();
         }
     }
-
-    // Пример использования
-    public static void main(String[] args) {
-        // Создаем аттракционы
-        Park.Attraction[] attractions = new Park.Attraction[3];
-        attractions[0] = new Park.Attraction("Американские горки", "10:00-20:00", 450.);
-        attractions[1] = new Park.Attraction("Колесо обозрения", "09:00-22:00", 250);
-        attractions[2] = new Park.Attraction("Ветерок", "11:00-19:00", 300);
-
-        // Создаем парк
-        Park myPark = new Park("Развлечений", attractions);
-
-        // Выводим информацию о парке
-        myPark.printParkInfo();
+}
