@@ -6,7 +6,6 @@ public class Product {
     private double price;
     private boolean isReserved;
 
-
     public Product(String name, String productionDate, String manufacturer,
                    String countryOfOrigin, double price, boolean isReserved) {
         this.name = name;
@@ -17,15 +16,13 @@ public class Product {
         this.isReserved = isReserved;
     }
 
-
     public void printInfo() {
         System.out.println("Товар: " + name);
         System.out.println("Дата производства: " + productionDate);
         System.out.println("Производитель: " + manufacturer);
         System.out.println("Страна происхождения: " + countryOfOrigin);
-        System.out.println("Цена:" + price + " ₽");
-        System.out.println("Статус брони: " + (isReserved ? "Забронирован" : "Доступен для покупки"));
-        System.out.println("----------------------");
+        System.out.println("Цена: " + price + " ₽");
+        System.out.println("Состояние бронирования: " + (isReserved ? "Забронирован" : "Свободен"));
+        System.out.println("-----------------------------");
     }
 }
-
