@@ -91,9 +91,9 @@ public void testFormDataResponse() {
 
 
             // Проверка структуры
-            .body("args", equalTo(Map.of()))
+            .body("args", equalTo(Collections.emptyMap()))
             .body("data", equalTo(""))
-            .body("files", equalTo(Map.of()))
+            .body("files", equalTo(Collections.emptyMap()))
 
             // Проверка данных формы
             .body("form.foo1", equalTo("bar1"))
@@ -102,6 +102,5 @@ public void testFormDataResponse() {
             // Проверка JSON
             .body("json.foo1", equalTo("bar1"))
             .body("json.foo2", equalTo("bar2"));
-}
 }
 }
