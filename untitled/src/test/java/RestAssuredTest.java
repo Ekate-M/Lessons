@@ -1,3 +1,4 @@
+import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.Test;
 import java.util.Collections;
 import static io.restassured.RestAssured.given;
@@ -44,7 +45,7 @@ public class RestAssuredTest {
                 .body("headers.user-agent", notNullValue())
                 .body("headers.accept", equalTo("*/*"))
                 .body("headers.'content-length'", equalTo("58"))
-                .body("json", nullValue())
+                .body("json", nullValue());
 
     }
     @Test
@@ -77,30 +78,30 @@ public class RestAssuredTest {
 
 } @Test
 public void testFormDataResponse() {
-    given()
-            .baseUri("https://postman-echo.com")
-            .contentType("application/x-www-form-urlencoded")
-            .formParam("foo1", "bar1")
-            .formParam("foo2", "bar2")
-            .log().all()
-            .when()
-            .post("/post")
-            .then()
-            .log().all()
-            .statusCode(200)
+        given()
+                .baseUri("https://postman-echo.com")
+                .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+                .formParam("foo1", "bar1")
+                .formParam("foo2", "bar2")
+                .log().all()
+                .when()
+                .post("/post")
+                .then()
+                .log().all()
+                .statusCode(200)
 
 
-            // Проверка структуры
-            .body("args", equalTo(Collections.emptyMap()))
-            .body("data", equalTo(""))
-            .body("files", equalTo(Collections.emptyMap()))
+                // Проверка структуры
+                .body("args", equalTo(Collections.emptyMap()))
+                .body("data", equalTo(""))
+                .body("files", equalTo(Collections.emptyMap()))
 
-            // Проверка данных формы
-            .body("form.foo1", equalTo("bar1"))
-            .body("form.foo2", equalTo("bar2"))
+                // Проверка данных формы
+                .body("form.foo1", equalTo("bar1"))
+                .body("form.foo2", equalTo("bar2"))
 
-            // Проверка JSON
-            .body("json.foo1", equalTo("bar1"))
-            .body("json.foo2", equalTo("bar2"));
-}
+                // Проверка JSON
+                .body("json.foo1", equalTo("bar1"))
+                .body("json.foo2", equalTo("bar2"));
+    }
 }
