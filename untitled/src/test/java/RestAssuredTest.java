@@ -14,9 +14,9 @@ public class RestAssuredTest {
                 .get("/get")
                 .then()
                 .statusCode(200)
-                .body("args", equalTo(Collections.emptyMap()))  // Проверяем, что args пуст
-                .body("headers.host", equalTo("postman-echo.com")) // Проверка конкретного заголовка
-                .body("url", equalTo("https://postman-echo.com/get"));  // URL без параметров
+                .body("args", equalTo(Collections.emptyMap()))
+                .body("headers.host", equalTo("postman-echo.com"))
+                .body("url", equalTo("https://postman-echo.com/get"));
     }
 
     @Test
@@ -124,5 +124,52 @@ public void testFormDataResponse() {
                 .body("headers.'content-length'", equalTo("58"))
                 .body("json", nullValue())
                 .body("url", equalTo("https://postman-echo.com/post"));
+    }@Test
+    public void testPatchRequestWith() {
+        String requestBody = "This is expected to be sent back as part of response body.";
+
+        given()
+                .baseUri("https://postman-echo.com")
+                .contentType("text/plain")
+                .body(requestBody)
+                .when()
+                .patch("/patch")
+                .then()
+                .statusCode(200)
+                .body("args", equalTo(Collections.emptyMap()))
+                .body("data", equalTo(requestBody))
+                .body("files", equalTo(Collections.emptyMap()))
+                .body("form", equalTo(Collections.emptyMap()))
+                .body("headers.host", equalTo("postman-echo.com"))
+                .body("headers.content-type", containsString("text/plain"))
+                .body("headers.accept", equalTo("*/*"))
+                .body("headers.'content-length'",
+                        equalTo(String.valueOf(requestBody.length())))
+                .body("json", nullValue())
+                .body("url", equalTo("https://postman-echo.com/patch"));
+    }
+    @Test
+    public void testDeleteRequestWithValidation() {
+        String requestBody = "This is expected to be sent back as part of response body.";
+
+        given()
+                .baseUri("https://postman-echo.com")
+                .contentType("text/plain")
+                .body(requestBody)
+                .when()
+                .delete("/delete")
+                .then()
+                .statusCode(200)
+                .body("args", equalTo(Collections.emptyMap()))
+                .body("data", equalTo(requestBody))
+                .body("files", equalTo(Collections.emptyMap()))
+                .body("form", equalTo(Collections.emptyMap()))
+                .body("headers.host", equalTo("postman-echo.com"))
+                .body("headers.content-type", containsString("text/plain"))
+                .body("headers.accept", equalTo("*/*"))
+                .body("headers.'content-length'",
+                        equalTo(String.valueOf(requestBody.length())))
+                .body("json", nullValue())
+                .body("url", equalTo("https://postman-echo.com/delete"));
     }
 }
