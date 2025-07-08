@@ -7,7 +7,7 @@ public class Park {
         this.attractions = attractions;
     }
 
-    // Внутренний класс для аттракционов
+
     public static class Attraction {
         private String attractionName;
         private String workingHours;

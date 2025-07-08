@@ -1,5 +1,5 @@
 public static void main(String[] args) {
-    // Пример работы с товарами
+
     Product[] productsArray = new Product[5];
     productsArray[0] = new Product("Samsung S25 Ultra", "01.02.2025", "Samsung Corp.", "Korea", 5599, true);
     productsArray[1] = new Product("iPhone 16 Pro", "15.09.2024", "Apple Inc.", "USA", 6499, false);
@@ -12,7 +12,7 @@ public static void main(String[] args) {
         product.printInfo();
     }
 
-    // Пример работы с парком
+
     Park.Attraction[] attractions = {
             new Park.Attraction("Американские горки", "10:00-20:00", 450),
             new Park.Attraction("Колесо обозрения", "09:00-22:00", 250),
