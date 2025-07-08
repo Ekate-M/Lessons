@@ -101,4 +101,28 @@ public void testFormDataResponse() {
                 .body("json.foo1", equalTo("bar1"))
                 .body("json.foo2", equalTo("bar2"));
     }
+    @Test
+    public void testPostRequest() {
+        String requestBody = "This is expected to be sent back as part of response body.";
+
+        given()
+                .baseUri("https://postman-echo.com")
+                .contentType("text/plain")
+                .body(requestBody)
+                .when()
+                .post("/post")
+                .then()
+                .statusCode(200)
+                .body("args", equalTo(Collections.emptyMap()))
+                .body("data", equalTo(requestBody))
+                .body("files", equalTo(Collections.emptyMap()))
+                .body("form", equalTo(Collections.emptyMap()))
+                .body("headers.host", equalTo("postman-echo.com"))
+                .body("headers.content-type", containsString("text/plain"))
+                .body("headers.user-agent", notNullValue())
+                .body("headers.accept", equalTo("*/*"))
+                .body("headers.'content-length'", equalTo("58"))
+                .body("json", nullValue())
+                .body("url", equalTo("https://postman-echo.com/post"));
+    }
 }
