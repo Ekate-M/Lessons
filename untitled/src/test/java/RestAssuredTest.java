@@ -31,15 +31,12 @@ public class RestAssuredTest {
                 .post("/post")
                 .then()
                 .statusCode(200)
-                // Проверка args (query-параметров)
                 .body("args", equalTo(Collections.emptyMap()))
-                // Проверка данных в теле ответа
                 .body("data", equalTo(requestBody))
-                // Проверка files (загруженных файлов)
                 .body("files", equalTo(Collections.emptyMap()))
-                // Проверка form (form-data)
+
                 .body("form", equalTo(Collections.emptyMap()))
-                // Проверка заголовков
+
                 .body("headers.host", equalTo("postman-echo.com"))
                 .body("headers.content-type", containsString("text/plain"))
                 .body("headers.user-agent", notNullValue())
@@ -50,7 +47,7 @@ public class RestAssuredTest {
     }
     @Test
     public void testPostmanEchoResponse() {
-        String requestBody = "test"; // Должно соответствовать content-length: 8
+        String requestBody = "test";
 
         given()
                 .baseUri("https://postman-echo.com")
@@ -61,16 +58,16 @@ public class RestAssuredTest {
                 .then()
                 .statusCode(200)
 
-                // Проверка структуры ответа
+
                 .body("args", equalTo(Collections.emptyMap()))
                 .body("files", equalTo(Collections.emptyMap()))
                 .body("form", equalTo(Collections.emptyMap()))
                 .body("json", nullValue())
 
-                // Проверка данных
+
                 .body("data", equalTo(requestBody))
 
-                // Проверка обязательных заголовков
+
                 .body("headers.host", equalTo("postman-echo.com"))
                 .body("headers.content-type", containsString("application/json"))
                 .body("headers.accept", equalTo("*/*"))
@@ -91,16 +88,16 @@ public void testFormDataResponse() {
                 .statusCode(200)
 
 
-                // Проверка структуры
+
                 .body("args", equalTo(Collections.emptyMap()))
                 .body("data", equalTo(""))
                 .body("files", equalTo(Collections.emptyMap()))
 
-                // Проверка данных формы
+
                 .body("form.foo1", equalTo("bar1"))
                 .body("form.foo2", equalTo("bar2"))
 
-                // Проверка JSON
+
                 .body("json.foo1", equalTo("bar1"))
                 .body("json.foo2", equalTo("bar2"));
     }
