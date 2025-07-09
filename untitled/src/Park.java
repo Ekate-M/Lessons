@@ -1,37 +1,28 @@
-public class Park {
-    private String parkName;
-    private Attraction[] attractions;
+public class Product {
+    private String name;
+    private String productionDate;
+    private String manufacturer;
+    private String countryOfOrigin;
+    private double price;
+    private boolean isReserved;
 
-    public Park(String name, Attraction[] attractions) {
-        this.parkName = name;
-        this.attractions = attractions;
+    public Product(String name, String productionDate, String manufacturer,
+                   String countryOfOrigin, double price, boolean isReserved) {
+        this.name = name;
+        this.productionDate = productionDate;
+        this.manufacturer = manufacturer;
+        this.countryOfOrigin = countryOfOrigin;
+        this.price = price;
+        this.isReserved = isReserved;
     }
 
-
-    public static class Attraction {
-        private String attractionName;
-        private String workingHours;
-        private double price;
-
-        public Attraction(String name, String hours, double price) {
-            this.attractionName = name;
-            this.workingHours = hours;
-            this.price = price;
-        }
-
-        public void printInfo() {
-            System.out.println("Аттракцион: " + attractionName);
-            System.out.println("Время работы: " + workingHours);
-            System.out.println("Стоимость: " + price + " ₽");
-            System.out.println("-----------------------------");
-        }
-    }
-
-    public void printParkInfo() {
-        System.out.println("Добро пожаловать в парк: " + parkName);
-        System.out.println("Наши аттракционы:");
-        for (Attraction attraction : attractions) {
-            attraction.printInfo();
-        }
+    public void printInfo() {
+        System.out.println("Товар: " + name);
+        System.out.println("Дата производства: " + productionDate);
+        System.out.println("Производитель: " + manufacturer);
+        System.out.println("Страна происхождения: " + countryOfOrigin);
+        System.out.println("Цена: " + price + " ₽");
+        System.out.println("Состояние бронирования: " + (isReserved ? "Забронирован" : "Свободен"));
+        System.out.println("-----------------------------");
     }
 }
