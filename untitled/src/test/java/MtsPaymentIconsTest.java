@@ -2,6 +2,7 @@
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -9,6 +10,19 @@ import java.util.List;
 
 public class MtsPaymentIconsTest {
     public static void main(String[] args) {
+        // Настройка ChromeOptions
+        ChromeOptions options = new ChromeOptions();
+        options.setBrowserVersion("stable");
+        options.addArguments("--start-maximized");
+
+
+
+
+        // Установка пути к драйверу
+
+
+
+        System.setProperty("webdriver.chrome.driver", "C:\\tools\\chromedriver-win64\\chromedriver.exe");
         // Настройка драйвера
         WebDriver driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

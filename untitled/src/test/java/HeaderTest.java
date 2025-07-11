@@ -13,10 +13,14 @@ public class HeaderTest {
         // 1. Автоматическая настройка драйвера
         WebDriverManager.chromedriver().setup();
 
-        // 2. Конфигурация браузера
+        // Настройка ChromeOptions
         ChromeOptions options = new ChromeOptions();
+        options.setBrowserVersion("stable");
         options.addArguments("--start-maximized");
-        options.addArguments("--disable-notifications");
+
+
+        // Установка пути к драйверу
+        System.setProperty("webdriver.chrome.driver", "C:\\tools\\chromedriver-win64\\chromedriver.exe");
 
         // 3. Инициализация драйвера
         WebDriver driver = new ChromeDriver(options);
@@ -35,7 +39,7 @@ public class HeaderTest {
                 System.out.println("Не найдена кнопка принятия куков, продолжаем...");
             }
 
-            // 6. Поиск заголовка с более точным локатором
+            // 6. Поиск заголовка с локатором
             By headerLocator = By.xpath("//h2[contains(., 'пополнение') and contains(., 'комиссии')]");
             WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(headerLocator));
 
