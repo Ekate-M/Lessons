@@ -27,7 +27,7 @@ public class ArrayCalculator {
             System.err.println(e.getMessage());
         }
 
-        // Генерация и обработка ArrayIndexOutOfBoundsException
+
         try {
             int[] arr = new int[3];
             System.out.println(arr[10]);  // Выход за границы массива
@@ -38,12 +38,12 @@ public class ArrayCalculator {
 
 
     public static int sumArray(String[][] arr) throws MyArraySizeException, MyArrayDataException {
-        // Проверка размера массива
+
         if (arr.length != 4) {
             throw new MyArraySizeException("Ошибка: массив должен быть 4x4 (строк: " + arr.length + ")");
         }
 
-        // Проверка количества столбцов в каждой строке
+
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].length != 4) {
                 throw new MyArraySizeException(
@@ -52,7 +52,7 @@ public class ArrayCalculator {
             }
         }
 
-        // Подсчет суммы
+
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
