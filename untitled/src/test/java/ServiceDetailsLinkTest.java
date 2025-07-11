@@ -8,7 +8,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
-
+//3.Проверить работу ссылки «Подробнее о сервисе»;
 public class ServiceDetailsLinkTest {
             public static void main(String[] args) {
                 // Настройка ChromeOptions

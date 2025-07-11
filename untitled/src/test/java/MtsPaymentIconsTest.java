@@ -10,17 +10,13 @@ import java.util.List;
 
 public class MtsPaymentIconsTest {
     public static void main(String[] args) {
+
         // Настройка ChromeOptions
         ChromeOptions options = new ChromeOptions();
         options.setBrowserVersion("stable");
         options.addArguments("--start-maximized");
 
-
-
-
         // Установка пути к драйверу
-
-
 
         System.setProperty("webdriver.chrome.driver", "C:\\tools\\chromedriver-win64\\chromedriver.exe");
         // Настройка драйвера
