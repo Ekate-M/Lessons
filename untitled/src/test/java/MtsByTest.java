@@ -23,53 +23,33 @@ public class MtsByTest {
             // Открытие страницы
             driver.get("https://www.mts.by/");
 
-            // 1. Закрываем куки-баннер, если он есть
-            try {
-                WebElement cookieAccept = wait.until(ExpectedConditions.elementToBeClickable(
-                        By.cssSelector(".cookie.show .cookie__close")
-                ));
-                cookieAccept.click();
-                System.out.println("Куки-баннер закрыт");
-            } catch (TimeoutException e) {
-                System.out.println("Куки-баннер не найден, продолжаем без закрытия");
-            }
+            // 1. Удаляем куки-баннер через JavaScript (надежный способ)
+            removeCookieBanner(driver);
 
             // 2. Раскрываем выпадающий список
             WebElement selectHeader = wait.until(ExpectedConditions.elementToBeClickable(
                     By.className("select__header")
             ));
-            selectHeader.click();
+
+            // Кликаем через JavaScript для избежания перехвата клика
+            clickWithJS(driver, selectHeader);
 
             // 3. Выбираем первый вариант из списка
             WebElement firstOption = wait.until(ExpectedConditions.elementToBeClickable(
                     By.cssSelector(".select__option:first-child")
             ));
-            firstOption.click();
+            clickWithJS(driver, firstOption);
 
             // 4. Заполняем поля формы
-            WebElement phoneField = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.id("connection-phone")
-            ));
-            phoneField.sendKeys("297777777");
+            fillField(driver, By.id("connection-phone"), "297777777");
+            fillField(driver, By.id("connection-sum"), "500");
+            fillField(driver, By.id("connection-email"), "ekate-meshkova@example.com");
 
-            WebElement sumField = driver.findElement(By.id("connection-sum"));
-            sumField.sendKeys("500");
-
-            WebElement emailField = driver.findElement(By.id("connection-email"));
-            emailField.sendKeys("ekate-meshkova@example.com");
-
-            // 5. Кликаем кнопку "Продолжить" с проверкой
-            WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(
+            // 5. Кликаем кнопку "Продолжить" через JavaScript
+            WebElement continueButton = wait.until(ExpectedConditions.presenceOfElementLocated(
                     By.cssSelector("button.button:not([disabled])")
             ));
-
-            // Дополнительная проверка, что элемент видим и кликабелен
-            wait.until(ExpectedConditions.visibilityOf(continueButton));
-            wait.until(ExpectedConditions.elementToBeClickable(continueButton));
-
-            // Прокручиваем к элементу перед кликом
-            ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", continueButton);
-            continueButton.click();
+            clickWithJS(driver, continueButton);
 
             System.out.println("Форма успешно отправлена");
 
@@ -80,7 +60,32 @@ public class MtsByTest {
             driver.quit();
         }
     }
-}
 
+    private static void removeCookieBanner(WebDriver driver) {
+        try {
+            // Пробуем закрыть обычным способом
+            WebElement cookieClose = driver.findElement(By.cssSelector(".cookie.show .cookie__close"));
+            cookieClose.click();
+            System.out.println("Куки-баннер закрыт через UI");
+        } catch (Exception e) {
+            // Если не получилось, удаляем через JavaScript
+            ((JavascriptExecutor)driver).executeScript(
+                    "var banner = document.querySelector('.cookie.show');" +
+                            "if (banner) banner.remove();"
+            );
+            System.out.println("Куки-баннер удален через JavaScript");
+        }
+    }
+
+    private static void clickWithJS(WebDriver driver, WebElement element) {
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+    }
+
+    private static void fillField(WebDriver driver, By locator, String value) {
+        WebElement field = driver.findElement(locator);
+        field.clear();
+        field.sendKeys(value);
+    }
+}
 
 
