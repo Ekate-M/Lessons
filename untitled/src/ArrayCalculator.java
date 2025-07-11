@@ -1,7 +1,7 @@
-public class Cyber {
+public class ArrayCalculator {
 
     public static void main(String[] args) {
-        Cyber main = new Cyber();
+
         String[][] correct = {
                 {"1", "2", "3", "4"},
                 {"1", "2", "3", "4"},
@@ -21,14 +21,8 @@ public class Cyber {
         };
 
         try {
-            System.out.println("Сумма correct: " + main.sumArray(correct));
-            System.out.println("Сумма incorrectSize: " + main.sumArray(incorrectSize));
-        } catch (MyArraySizeException | MyArrayDataException e) {
-            System.err.println(e.getMessage());
-        }
-
-        try {
-            System.out.println("Сумма incorrectData: " + main.sumArray(incorrectData));
+            System.out.println("Сумма correct: " + sumArray(correct));  // Прямой вызов
+            System.out.println("Сумма incorrectSize: " + sumArray(incorrectSize));
         } catch (MyArraySizeException | MyArrayDataException e) {
             System.err.println(e.getMessage());
         }
@@ -43,11 +37,13 @@ public class Cyber {
     }
 
 
-    public int sumArray(String[][] arr) throws MyArraySizeException, MyArrayDataException {
+    public static int sumArray(String[][] arr) throws MyArraySizeException, MyArrayDataException {
+        // Проверка размера массива
         if (arr.length != 4) {
             throw new MyArraySizeException("Ошибка: массив должен быть 4x4 (строк: " + arr.length + ")");
         }
 
+        // Проверка количества столбцов в каждой строке
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].length != 4) {
                 throw new MyArraySizeException(
@@ -56,6 +52,7 @@ public class Cyber {
             }
         }
 
+        // Подсчет суммы
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
@@ -71,6 +68,4 @@ public class Cyber {
         return sum;
     }
 }
-
-
 
