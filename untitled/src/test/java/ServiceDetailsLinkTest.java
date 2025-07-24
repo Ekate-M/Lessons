@@ -32,11 +32,11 @@ public class ServiceDetailsLinkTest extends BaseTest {
         driver.switchTo().window(tabs.get(tabs.size() - 1));
 
         // 5. Проверяем URL новой вкладки
-        wait.until(ExpectedConditions.urlContains("poryadok-oplaty-i-bezopasnost-internet-platezhey"));
+        wait.until(ExpectedConditions.urlContains("https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/"));
 
         // 6. Проверяем содержимое новой вкладки
         WebElement content = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//h1[contains(., 'Порядок оплаты и безопасность интернет-платежей')]")));
+                By.xpath("//bx-core bx-win bx-no-touch bx-no-retina bx-chrome ya-page_js_yes websockets audio cssgradients contenteditable')]")));
 
         assertTrue(content.isDisplayed(), "Ожидаемый контент не найден на новой вкладке");
 

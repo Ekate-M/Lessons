@@ -16,11 +16,10 @@ public class MtsByTest extends BaseTest {
         ));
         link.click();
 
-        wait.until(ExpectedConditions.urlContains("poryadok-oplaty-i-bezopasnost-internet-platezhey"));
-
-        WebElement content = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.cssSelector(".service-content")
-        ));
+        wait.until(ExpectedConditions.urlContains("<a href=\"/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/\">Подробнее о сервисе</a>"));
+                WebElement content = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                        By.cssSelector(".service-content")
+                ));
         assertTrue(content.isDisplayed(), "Контент страницы не отображается");
     }
 
@@ -29,12 +28,12 @@ public class MtsByTest extends BaseTest {
     public void testPaymentForm() {
 
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector(".service-select")
+                By.cssSelector(".select__wrapper")
         ));
         dropdown.click();
 
         WebElement firstOption = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector(".select-option:first-child")
+                By.cssSelector(".select__now")
         ));
         firstOption.click();
 
@@ -45,7 +44,7 @@ public class MtsByTest extends BaseTest {
 
         // Проверка кнопки
         WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector(".continue-button")
+                By.cssSelector(".button button__default ")
         ));
         assertTrue(continueButton.isEnabled(), "Кнопка должна быть активна");
     }
