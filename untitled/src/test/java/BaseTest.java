@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
     protected WebDriver driver;
@@ -15,7 +14,7 @@ public class BaseTest {
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\tools\\chromedriver-win64\\chromedriver.exe");
 
-
+        ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver(options);
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -26,3 +25,4 @@ public class BaseTest {
     public void tearDown() {
         driver.quit();
     }
+}

@@ -1,4 +1,3 @@
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -9,10 +8,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MtsByTest extends BaseTest {
-
-
-
-
     @Test
     @DisplayName("Проверка работы ссылки 'Подробнее о сервисе'")
     public void testServiceDetailsLink() {
@@ -53,8 +48,6 @@ public class MtsByTest extends BaseTest {
                 By.cssSelector(".continue-button")
         ));
         assertTrue(continueButton.isEnabled(), "Кнопка должна быть активна");
-
-
     }
 
     private void fillField(String fieldName, String value) {
