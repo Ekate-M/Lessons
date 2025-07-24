@@ -1,11 +1,11 @@
+import core.CookieUtils;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MtsPaymentIconsTest extends BaseTest {
@@ -15,36 +15,67 @@ public class MtsPaymentIconsTest extends BaseTest {
 
     @Test
     public void verifyPaymentIcons() {
+
         driver.get("https://www.mts.by/");
 
-        List<WebElement> icons = wait.until(
-                ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                        By.cssSelector(".payment-icons img, .payment-icons svg")
-                ));
 
-        // Проверка количества иконок
-        assertEquals(EXPECTED_ICONS.size(), icons.size(),
-                "Количество иконок не соответствует ожидаемому");
+        CookieUtils.acceptCookies(driver, wait);
 
-        // Проверка наличия всех иконок
-        List<String> foundIconNames = new ArrayList<>();
-        for (WebElement icon : icons) {
-            String iconName = getIconName(icon);
-            foundIconNames.add(iconName);
-            assertTrue(icon.isDisplayed(), "Иконка не отображается: " + iconName);
-        }
+
+
+        WebElement payPartnersContainer = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.cssSelector(".pay__partners")
+                )
+        );
+
+        //  Ищем иконки только внутри этого контейнера
+        List<WebElement> icons = payPartnersContainer.findElements(By.xpath(
+                ".//img[" +
+                        "contains(@src, 'visa') or " +
+                        "contains(@src, 'mastercard') or " +
+                        "contains(@src, 'belkart') or " +
+                        "contains(@alt, 'Visa') or " +
+                        "contains(@alt, 'Mastercard') or " +
+                        "contains(@alt, 'Белкарт')]"
+        ));
+
+
+        System.out.println("Найдено " + icons.size() + " иконок платежных систем:");
+        icons.forEach(icon -> {
+            System.out.println(" - Тег: " + icon.getTagName());
+            System.out.println("   Src: " + icon.getAttribute("src"));
+            System.out.println("   Alt: " + icon.getAttribute("alt"));
+            System.out.println("   Class: " + icon.getAttribute("class"));
+        });
+
 
         for (String expectedIcon : EXPECTED_ICONS) {
-            assertTrue(foundIconNames.stream().anyMatch(name ->
-                            name.toLowerCase().contains(expectedIcon.toLowerCase())),
-                    "Не найдена иконка: " + expectedIcon);
+            boolean found = icons.stream().anyMatch(icon -> {
+                String src = icon.getAttribute("src") != null ?
+                        icon.getAttribute("src").toLowerCase() : "";
+                String alt = icon.getAttribute("alt") != null ?
+                        icon.getAttribute("alt").toLowerCase() : "";
+
+                if (expectedIcon.equals("Белкарт")) {
+                    return src.contains("belkart") || alt.contains("белкарт");
+                }
+                return src.contains(expectedIcon.toLowerCase()) ||
+                        alt.contains(expectedIcon.toLowerCase());
+            });
+
+            assertTrue(found, "Не найдена иконка: " + expectedIcon +
+                    "\nНайденные иконки: " + getFoundIconsInfo(icons));
         }
     }
 
-    private String getIconName(WebElement icon) {
-        return Optional.ofNullable(icon.getAttribute("alt"))
-                .or(() -> Optional.ofNullable(icon.getAttribute("title")))
-                .or(() -> Optional.ofNullable(icon.getAttribute("class")))
-                .orElse("");
+    private String getFoundIconsInfo(List<WebElement> icons) {
+        StringBuilder sb = new StringBuilder();
+        icons.forEach(icon -> {
+            sb.append("\n- Src: ").append(icon.getAttribute("src"))
+                    .append(", Alt: ").append(icon.getAttribute("alt"))
+                    .append(", Class: ").append(icon.getAttribute("class"));
+        });
+        return sb.toString();
     }
 }

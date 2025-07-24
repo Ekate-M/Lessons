@@ -17,6 +17,18 @@
     <webdrivermanager.version>5.6.3</webdrivermanager.version>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <!-- Selenium -->
     <dependency>
@@ -25,13 +37,11 @@
       <version>${selenium.version}</version>
     </dependency>
 
-    <!-- JUnit 5 BOM (управляет версиями всех компонентов) -->
+    <!-- Selenium DevTools -->
     <dependency>
-      <groupId>org.junit</groupId>
-      <artifactId>junit-bom</artifactId>
-      <version>${junit.version}</version>
-      <type>pom</type>
-      <scope>import</scope>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-devtools-v138</artifactId>
+      <version>${selenium.version}</version>
     </dependency>
 
     <!-- JUnit Jupiter API -->
@@ -55,17 +65,7 @@
       <version>${webdrivermanager.version}</version>
       <scope>test</scope>
     </dependency>
-  </dependencies><dependencyManagement>
-  <dependencies>
-    <dependency>
-      <groupId>org.junit</groupId>
-      <artifactId>junit-bom</artifactId>
-      <version>5.10.0</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
   </dependencies>
-</dependencyManagement>
 
   <build>
     <plugins>
