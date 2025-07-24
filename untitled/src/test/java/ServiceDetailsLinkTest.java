@@ -44,7 +44,6 @@ public class ServiceDetailsLinkTest extends BaseTest {
         WebElement cookieAccept = wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.xpath("//button[contains(@class, 'cookie__ok') or contains(@id, 'cookie-agree')]")));
 
-        // Кликаем через JavaScript, минуя перекрытие
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();", cookieAccept);
 
         // Ждем исчезновения баннера
