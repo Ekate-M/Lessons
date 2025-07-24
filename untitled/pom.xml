@@ -22,14 +22,29 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>4.18.0</version>
+      <version>${selenium.version}</version>
     </dependency>
 
-    <!-- JUnit 5 (единая версия!) -->
+    <!-- JUnit 5 BOM (управляет версиями всех компонентов) -->
+    <dependency>
+      <groupId>org.junit</groupId>
+      <artifactId>junit-bom</artifactId>
+      <version>${junit.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+
+    <!-- JUnit Jupiter API -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>5.10.0</version>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- JUnit Jupiter Engine -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
       <scope>test</scope>
     </dependency>
 
@@ -37,10 +52,20 @@
     <dependency>
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
-      <version>5.6.3</version>
+      <version>${webdrivermanager.version}</version>
       <scope>test</scope>
     </dependency>
+  </dependencies><dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit</groupId>
+      <artifactId>junit-bom</artifactId>
+      <version>5.10.0</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
   </dependencies>
+</dependencyManagement>
 
   <build>
     <plugins>
