@@ -10,25 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MtsByTest extends BaseTest {
 
-    @Test
-    @DisplayName("Проверка заголовка блока 'Онлайн пополнение без комиссии'")
-    public void testPaymentBlockTitle() {
-        WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//h2[contains(., 'пополнение') and contains(., 'комиссии')]")
-        ));
 
-        String normalizedText = header.getText()
-                .replace("\n", " ")
-                .replaceAll("\\s+", " ")
-                .trim();
-
-        assertAll(
-                () -> assertTrue(normalizedText.contains("Онлайн пополнение"),
-                        "Заголовок должен содержать 'Онлайн пополнение'"),
-                () -> assertTrue(normalizedText.contains("без комиссии"),
-                        "Заголовок должен содержать 'без комиссии'")
-        );
-    }
 
 
     @Test

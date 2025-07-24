@@ -24,12 +24,5 @@ public class BaseTest {
 
     @AfterEach
     public void tearDown() {
-        if (driver != null) {
-            try {
-                driver.quit();
-            } catch (Exception e) {
-                System.err.println("Error while closing the driver: " + e.getMessage());
-            }
-        }
+        driver.quit();
     }
-}
