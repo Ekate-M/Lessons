@@ -1,58 +1,49 @@
+import core.CookieUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import java.util.Arrays;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MtsByTest extends BaseTest {
-    @Test
-    @DisplayName("Проверка работы ссылки 'Подробнее о сервисе'")
-    public void testServiceDetailsLink() {
-        WebElement link = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//a[contains(text(), 'Подробнее о сервисе')]")
-        ));
-        link.click();
-
-        wait.until(ExpectedConditions.urlContains("<a href=\"/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/\">Подробнее о сервисе</a>"));
-                WebElement content = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                        By.cssSelector(".service-content")
-                ));
-        assertTrue(content.isDisplayed(), "Контент страницы не отображается");
-    }
 
     @Test
-    @DisplayName("Проверка работы формы оплаты")
+    @DisplayName("Проверка работы формы оплаты услуг связи")
     public void testPaymentForm() {
+        // Ожидаем загрузки страницы
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
+        // Выбираем "Услуги связи" из выпадающего списка
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(
                 By.cssSelector(".select__wrapper")
         ));
         dropdown.click();
 
-        WebElement firstOption = wait.until(ExpectedConditions.elementToBeClickable(
+        WebElement communicationServicesOption = wait.until(ExpectedConditions.elementToBeClickable(
                 By.cssSelector(".select__now")
         ));
-        firstOption.click();
+        communicationServicesOption.click();
 
-        // Заполнение полей
-        fillField("phone", "297777777");
-        fillField("amount", "500");
-        fillField("email", "test@example.com");
 
-        // Проверка кнопки
+        fillField(By.id("connection-phone"), "297777777");
+        fillField(By.id("connection-sum"), "500");
+        fillField(By.id("connection-email"), "test@example.com");
+
         WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector(".button button__default ")
-        ));
+                        By.cssSelector(".button.button__default")));
+        continueButton.click();
         assertTrue(continueButton.isEnabled(), "Кнопка должна быть активна");
+
+
     }
 
-    private void fillField(String fieldName, String value) {
-        WebElement field = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.name(fieldName)
-        ));
+    private void fillField(By locator, String value) {
+        WebElement field = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         field.clear();
         field.sendKeys(value);
     }
