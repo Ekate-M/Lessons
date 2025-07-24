@@ -27,7 +27,7 @@ public class MtsByTest extends BaseTest {
     @Test
     @DisplayName("Проверка работы формы оплаты")
     public void testPaymentForm() {
-        // Выбор услуги связи
+
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(
                 By.cssSelector(".service-select")
         ));
