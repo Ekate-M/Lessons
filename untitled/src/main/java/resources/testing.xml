@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Test Suite" verbose="1">
+<suite name="MTS Test Suite" verbose="1">
     <test name="Chrome Tests">
-        <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="com.core.CookieUtils "/>
-            <class name="com.java.BaseTest"/>
+            <class name="core.HeaderTest"/>
+            <class name="core.MtsByTest"/>
+            <class name="core.ServiceDetailsLinkTest"/>
         </classes>
     </test>
-
-
 </suite>

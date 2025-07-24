@@ -1,28 +1,14 @@
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
-import java.util.*;
-
+import java.util.Arrays;
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MtsPaymentIconsTest {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class MtsPaymentIconsTest extends BaseTest {
     private static final List<String> EXPECTED_ICONS = Arrays.asList(
             "Visa", "Mastercard", "Белкарт", "Verified By Visa"
     );
-
-    @BeforeEach
-    public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
 
     @Test
     public void verifyPaymentIcons() {
@@ -57,12 +43,5 @@ public class MtsPaymentIconsTest {
                 .or(() -> Optional.ofNullable(icon.getAttribute("title")))
                 .or(() -> Optional.ofNullable(icon.getAttribute("class")))
                 .orElse("");
-    }
-
-    @AfterEach
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
     }
 }
